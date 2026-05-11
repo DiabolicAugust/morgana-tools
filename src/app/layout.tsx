@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   verification: {
-    google: '4V_ss9p7sANv2-u5reyJtosMpS2-NViA_WDETCIwckI',
+    google: 'IAMnX77PX2kLqyIrbTxfOI1TdG8gBBXOZ1hmTj5zguM',
   },
 };
 
