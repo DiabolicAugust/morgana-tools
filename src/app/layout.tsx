@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    'Free, fast browser utilities: remove line breaks, format JSON, generate UUID v4 identifiers, and create strong passwords. SEO-friendly pages with usable defaults.',
+    'Free in-browser tools for developers and writers: JSON formatting, Base64 and URL encoding, timestamps, SHA hashes, case conversion, line breaks, UUIDs, and secure passwords—your data stays on your device.',
   applicationName: SITE_NAME,
   robots: {
     index: true,
@@ -38,13 +38,13 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} — developer utilities`,
     description:
-      'Format JSON, remove line breaks, generate UUIDs, and build secure passwords—all in your browser.',
+      'JSON, Base64, URL encode/decode, Unix time, SHA hashes, case tools, line breaks, UUIDs, and passwords—fast, private, no upload.',
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_NAME,
     description:
-      'Free online utilities for text, JSON, UUIDs, and passwords. Static pages tuned for clarity and discovery.',
+      'Encoding, hashing, time, text, and security utilities that run locally in your browser.',
   },
   alternates: {
     canonical: siteUrl,

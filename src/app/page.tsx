@@ -17,7 +17,7 @@ export default function Home() {
     "@type": "WebSite",
     name: SITE_NAME,
     description:
-      "Collection of small, free utilities for formatting text and JSON and generating identifiers and passwords.",
+      "Free browser utilities for JSON, Base64 and URL encoding, Unix timestamps, SHA hashes, text case, line breaks, UUIDs, and password generation.",
     url: base,
     inLanguage: "en",
   };
@@ -47,8 +47,7 @@ export default function Home() {
           </h1>
           <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
             One place for dependable, browser-based helpers—organized by category—with
-            long-form explanations, FAQs, and editorial related-tool links tuned for clarity
-            (and refreshed when keyword demand shifts).
+            long-form explanations, FAQs, and curated related-tool links.
           </p>
           <nav aria-label="Jump to categories" className="flex flex-wrap gap-2 pt-2 text-sm">
             {groups.map(({ categoryId }) => (
@@ -80,35 +79,17 @@ export default function Home() {
               <ul className="mt-6 grid gap-4 sm:grid-cols-2">
                 {tools.map((tool) => (
                   <li key={tool.slug}>
-                    <article className="flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:border-zinc-300 hover:shadow dark:border-zinc-800 dark:bg-zinc-900/60 dark:hover:border-zinc-700">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-md bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
-                          {TOOL_CATEGORY_LABELS[tool.categoryId]}
-                        </span>
-                        <span className="text-xs tabular-nums text-zinc-400 dark:text-zinc-500" title="Ordering hint from keyword demand (higher surfaces first).">
-                          Priority · {tool.searchVolumePriority}
-                        </span>
-                      </div>
-                      <h3 className="mt-3 text-lg font-medium text-zinc-900 dark:text-zinc-100">
-                        <Link
-                          href={`/tools/${tool.slug}`}
-                          className="underline-offset-4 hover:underline"
-                        >
-                          {tool.title}
-                        </Link>
+                    <Link
+                      href={`/tools/${tool.slug}`}
+                      className="group flex h-full flex-col rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:border-zinc-300 hover:shadow focus-visible:outline focus-visible:ring-2 focus-visible:ring-zinc-400 dark:border-zinc-800 dark:bg-zinc-900/60 dark:hover:border-zinc-700 dark:focus-visible:ring-zinc-500"
+                    >
+                      <h3 className="text-lg font-medium text-zinc-900 group-hover:underline dark:text-zinc-100">
+                        {tool.title}
                       </h3>
                       <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                         {tool.shortDescription}
                       </p>
-                      <p className="mt-4">
-                        <Link
-                          href={`/tools/${tool.slug}`}
-                          className="text-sm font-medium text-zinc-900 underline underline-offset-4 hover:text-zinc-700 dark:text-zinc-100 dark:hover:text-zinc-300"
-                        >
-                          Open tool
-                        </Link>
-                      </p>
-                    </article>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -121,9 +102,8 @@ export default function Home() {
             Built for clarity and discovery
           </h2>
           <p className="mt-2 leading-relaxed">
-            Every utility ships with unique metadata, FAQs, curated related links,
-            categorical hubs, XML sitemap priority derived from documented demand scores,
-            and visible long-form intros so bots and humans see the same story.
+            Each tool page includes a clear overview, FAQs, related links, and structured
+            data—so search engines and visitors get consistent, accurate descriptions.
           </p>
         </section>
       </main>
