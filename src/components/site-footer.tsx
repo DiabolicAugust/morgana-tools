@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { SITE_NAME } from "@/lib/site";
 
 export function SiteFooter() {
@@ -7,6 +8,14 @@ export function SiteFooter() {
       <p>
         © {year} {SITE_NAME}. Utilities run locally in your browser when possible.
       </p>
+      <nav aria-label="Legal" className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1">
+        <Link
+          href="/privacy"
+          className="font-medium text-zinc-600 underline-offset-4 hover:text-zinc-900 hover:underline dark:text-zinc-400 dark:hover:text-zinc-100"
+        >
+          Privacy Policy
+        </Link>
+      </nav>
     </footer>
   );
 }
