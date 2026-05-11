@@ -1,18 +1,18 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { getSiteUrl, SITE_NAME } from "@/lib/site";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/site-header';
+import { getSiteUrl, SITE_NAME } from '@/lib/site';
+import './globals.css';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 const siteUrl = getSiteUrl();
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Free, fast browser utilities: remove line breaks, format JSON, generate UUID v4 identifiers, and create strong passwords. SEO-friendly pages with usable defaults.",
+    'Free, fast browser utilities: remove line breaks, format JSON, generate UUID v4 identifiers, and create strong passwords. SEO-friendly pages with usable defaults.',
   applicationName: SITE_NAME,
   robots: {
     index: true,
@@ -32,22 +32,25 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true },
   },
   openGraph: {
-    type: "website",
-    locale: "en",
+    type: 'website',
+    locale: 'en',
     url: siteUrl,
     siteName: SITE_NAME,
     title: `${SITE_NAME} — developer utilities`,
     description:
-      "Format JSON, remove line breaks, generate UUIDs, and build secure passwords—all in your browser.",
+      'Format JSON, remove line breaks, generate UUIDs, and build secure passwords—all in your browser.',
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: SITE_NAME,
     description:
-      "Free online utilities for text, JSON, UUIDs, and passwords. Static pages tuned for clarity and discovery.",
+      'Free online utilities for text, JSON, UUIDs, and passwords. Static pages tuned for clarity and discovery.',
   },
   alternates: {
     canonical: siteUrl,
+  },
+  verification: {
+    google: '4V_ss9p7sANv2-u5reyJtosMpS2-NViA_WDETCIwckI',
   },
 };
 
