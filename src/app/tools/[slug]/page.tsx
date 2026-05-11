@@ -5,6 +5,7 @@ import { JsonLd } from '@/components/json-ld';
 import { Base64Tool } from '@/components/tools/base64-tool';
 import { CaseConverterTool } from '@/components/tools/case-converter-tool';
 import { HashGeneratorTool } from '@/components/tools/hash-generator-tool';
+import { ImageFormatConverterTool } from '@/components/tools/image-format-converter-tool';
 import { JsonFormatterTool } from '@/components/tools/json-formatter-tool';
 import { LineBreakRemoverTool } from '@/components/tools/line-break-remover-tool';
 import { PasswordGeneratorTool } from '@/components/tools/password-generator-tool';
@@ -83,6 +84,32 @@ function ToolPanels({ slug }: { slug: string }) {
       return <TimestampConverterTool />;
     case 'hash-generator':
       return <HashGeneratorTool />;
+    case 'webp-to-png':
+      return <ImageFormatConverterTool from="webp" to="png" />;
+    case 'webp-to-jpg':
+      return <ImageFormatConverterTool from="webp" to="jpeg" />;
+    case 'png-to-jpg':
+      return <ImageFormatConverterTool from="png" to="jpeg" />;
+    case 'jpg-to-png':
+      return <ImageFormatConverterTool from="jpeg" to="png" />;
+    case 'avif-to-png':
+      return <ImageFormatConverterTool from="avif" to="png" />;
+    case 'png-to-webp':
+      return <ImageFormatConverterTool from="png" to="webp" />;
+    case 'jpg-to-webp':
+      return <ImageFormatConverterTool from="jpeg" to="webp" />;
+    case 'png-to-avif':
+      return <ImageFormatConverterTool from="png" to="avif" />;
+    case 'jpg-to-avif':
+      return <ImageFormatConverterTool from="jpeg" to="avif" />;
+    case 'avif-to-jpg':
+      return <ImageFormatConverterTool from="avif" to="jpeg" />;
+    case 'webp-to-avif':
+      return <ImageFormatConverterTool from="webp" to="avif" />;
+    case 'avif-to-webp':
+      return <ImageFormatConverterTool from="avif" to="webp" />;
+    case 'heic-to-jpg':
+      return <ImageFormatConverterTool from="heic" to="jpeg" />;
     default:
       return null;
   }
