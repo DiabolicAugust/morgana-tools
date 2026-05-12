@@ -2,6 +2,12 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
+import {
+  HOME_META_DESCRIPTION,
+  HOME_OPENGRAPH_TITLE,
+  SITE_META_KEYWORDS,
+  SITE_TITLE_DEFAULT,
+} from '@/lib/site-seo';
 import { getSiteUrl, SITE_NAME } from '@/lib/site';
 import './globals.css';
 
@@ -20,20 +26,11 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${SITE_NAME} — free browser converters & developer tools`,
+    default: SITE_TITLE_DEFAULT,
     template: `%s | ${SITE_NAME}`,
   },
-  description:
-    'Free browser tools for ebooks, HEIC/WebP/AVIF/PNG conversions, JSON, Base64, URLs, timestamps, SHA digests, and passwords—local where each page says so.',
-  keywords: [
-    'free online tools',
-    'browser utilities',
-    'image converter online',
-    'ebook converter',
-    'json formatter online',
-    'privacy conscious browser tools',
-    SITE_NAME.toLowerCase(),
-  ],
+  description: HOME_META_DESCRIPTION,
+  keywords: [...SITE_META_KEYWORDS],
   applicationName: SITE_NAME,
   robots: {
     index: true,
@@ -45,23 +42,21 @@ export const metadata: Metadata = {
     locale: 'en',
     url: siteUrl,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — free browser converters & developer tools`,
-    description:
-      'Convert files, tune developer payloads, and handle security helpers in-browser. Morgana skips a separate “upload here to convert” step on flows that stay local.',
+    title: HOME_OPENGRAPH_TITLE,
+    description: HOME_META_DESCRIPTION,
     images: [
       {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} — free browser converters & developer tools`,
+        alt: HOME_OPENGRAPH_TITLE,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE_NAME} — browser converters & dev tools`,
-    description:
-      'Ebooks, images, JSON, encoding, hashing, and text helpers in your browser. Local processing where each page promises it.',
+    title: HOME_OPENGRAPH_TITLE,
+    description: HOME_META_DESCRIPTION,
     images: ['/twitter-image'],
   },
   alternates: {

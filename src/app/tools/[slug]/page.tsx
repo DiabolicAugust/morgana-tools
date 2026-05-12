@@ -18,6 +18,7 @@ import { TxtNormalizeTool } from '@/components/tools/ebook-tools';
 import { ebookConversionPairForSlug } from '@/lib/ebook-conversion-routes';
 import { imageConversionPairForSlug } from '@/lib/image-conversions';
 import { getSiteUrl, SITE_NAME } from '@/lib/site';
+import { SITE_SHARE_IMAGE_ALT } from '@/lib/site-seo';
 import {
   getAllToolSlugs,
   getRelatedTools,
@@ -37,7 +38,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tool = getToolBySlug(slug);
   if (!tool) {
-    return { title: 'Tool not found' };
+    return {
+      title: 'Tool not found',
+      robots: { index: false, follow: false },
+    };
   }
 
   const base = getSiteUrl();
@@ -66,11 +70,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url,
       title: `${title} — ${SITE_NAME}`,
       description: ogDesc,
+      images: [
+        {
+          url: '/opengraph-image',
+          width: 1200,
+          height: 630,
+          alt: SITE_SHARE_IMAGE_ALT,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${title} — ${SITE_NAME}`,
       description: ogDesc,
+      images: ['/twitter-image'],
     },
   };
 }

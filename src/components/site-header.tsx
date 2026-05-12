@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HeaderCategoryNav } from "@/components/header-category-nav";
+import { SITE_HEADER_TAGLINE } from "@/lib/site-seo";
 import { SITE_NAME } from "@/lib/site";
 import { getToolsGroupedByCategory } from "@/lib/tools";
 
@@ -17,7 +18,7 @@ export function SiteHeader() {
             {SITE_NAME}
           </Link>
           <span className="hidden text-sm text-zinc-500 sm:inline dark:text-zinc-400">
-            Browser tools for files &amp; APIs
+            {SITE_HEADER_TAGLINE}
           </span>
         </div>
         <HeaderCategoryNav

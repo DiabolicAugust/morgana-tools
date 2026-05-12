@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { JsonLd } from "@/components/json-ld";
+import {
+  HOME_JSONLD_SITE_DESCRIPTION,
+  HOME_META_DESCRIPTION,
+  HOME_OPENGRAPH_TITLE,
+  HOME_PRIMARY_HEADLINE,
+  SITE_META_KEYWORDS,
+} from "@/lib/site-seo";
 import { getSiteUrl, SITE_NAME } from "@/lib/site";
 import {
   getToolsGroupedByCategory,
@@ -9,15 +16,11 @@ import {
   type ToolCategoryId,
 } from "@/lib/tools";
 
-const HOME_OG_TITLE = `${SITE_NAME} — convert and fix files in your browser`;
-
-const HOME_META_DESCRIPTION =
-  "Convert and fix files in your browser with free helpers for ebooks, images (HEIC/WebP/AVIF/PNG), JSON, Base64, URLs, timestamps, hashes, and passwords.";
-
 export const metadata: Metadata = {
-  title: "Solve format and data jobs in your browser",
+  title: HOME_PRIMARY_HEADLINE,
   description: HOME_META_DESCRIPTION,
   keywords: [
+    ...SITE_META_KEYWORDS,
     "free online converter",
     "browser tools",
     "ebook converter online",
@@ -29,17 +32,14 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: HOME_OG_TITLE,
+    title: HOME_OPENGRAPH_TITLE,
     description: HOME_META_DESCRIPTION,
   },
   twitter: {
-    title: HOME_OG_TITLE,
+    title: HOME_OPENGRAPH_TITLE,
     description: HOME_META_DESCRIPTION,
   },
 };
-
-const HOME_JSONLD_WEBSITE_DESC =
-  "Morgana Tools lists free converters and helpers for ebooks, documents, images, UTF-8 text, API-style payloads, passwords, and digests. Most interactive flows run in your browser so files typically stay on your device; pages spell out DRM and format limits.";
 
 /** One-line benefit hint for category jump links (shown as native tooltip). */
 const CATEGORY_CHIP_HINT: Record<ToolCategoryId, string> = {
@@ -79,7 +79,7 @@ export default function Home() {
         "@id": organizationId,
         name: SITE_NAME,
         url: base,
-        description: HOME_JSONLD_WEBSITE_DESC,
+        description: HOME_JSONLD_SITE_DESCRIPTION,
         logo: {
           "@type": "ImageObject",
           url: `${base}/opengraph-image`,
@@ -91,7 +91,7 @@ export default function Home() {
         "@type": "WebSite",
         "@id": websiteId,
         name: SITE_NAME,
-        description: HOME_JSONLD_WEBSITE_DESC,
+        description: HOME_JSONLD_SITE_DESCRIPTION,
         url: base,
         inLanguage: "en",
         publisher: { "@id": organizationId },
@@ -122,7 +122,7 @@ export default function Home() {
             {SITE_NAME}
           </p>
           <h1 className="text-balance text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">
-            Convert and fix files in your browser
+            {HOME_PRIMARY_HEADLINE}
           </h1>
           <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
             Morgana bundles free helpers that{" "}

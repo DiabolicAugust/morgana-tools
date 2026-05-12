@@ -56,20 +56,20 @@ export const EBOOK_FORMAT_CATEGORY: Record<EbookFormatId, EbookCategoryGroupId> 
   pages_zip: 'comics',
 };
 
-/** Short UI label — primary extension only (leading dot), uppercase for scanability. */
+/** Short UI label — extension stem, uppercase for scanability (no leading dot in titles). */
 export const EBOOK_FORMAT_DISPLAY: Record<EbookFormatId, string> = {
-  txt: '.TXT',
-  markdown: '.MD',
-  html: '.HTML',
-  epub: '.EPUB',
-  fb2: '.FB2',
-  pdf: '.PDF',
-  docx: '.DOCX',
-  odt: '.ODT',
-  rtf: '.RTF',
-  pml: '.PML',
-  cbz: '.CBZ',
-  pages_zip: '.ZIP',
+  txt: 'TXT',
+  markdown: 'MD',
+  html: 'HTML',
+  epub: 'EPUB',
+  fb2: 'FB2',
+  pdf: 'PDF',
+  docx: 'DOCX',
+  odt: 'ODT',
+  rtf: 'RTF',
+  pml: 'PML',
+  cbz: 'CBZ',
+  pages_zip: 'ZIP',
 };
 
 export function ebookSlugSegment(fmt: EbookFormatId): string {

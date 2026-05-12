@@ -1,4 +1,5 @@
 import { SITE_NAME } from "@/lib/site";
+import { SITE_OG_CARD_SUBLINE } from "@/lib/site-seo";
 
 /** JSX for `next/og` ImageResponse — inline styles only (no Tailwind). */
 export function ShareOgGraphic() {
@@ -36,9 +37,7 @@ export function ShareOgGraphic() {
           lineHeight: 1.35,
         }}
       >
-        Free in-browser utilities—JSON, Base64 &amp; URLs, timestamps, hashing,
-        passwords, plus linked ebook and image pairs. Processing stays local on tools
-        that promise it; each page warns when a CDN script joins the workflow.
+        {SITE_OG_CARD_SUBLINE}
       </div>
     </div>
   );
