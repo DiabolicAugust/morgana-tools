@@ -36,8 +36,9 @@ export function ShareOgGraphic() {
           lineHeight: 1.35,
         }}
       >
-        Free in-browser utilities — JSON, Base64, URLs, timestamps, SHA hashes &
-        passwords. Processing stays on your device.
+        Free in-browser utilities—JSON, Base64 &amp; URLs, timestamps, hashing,
+        passwords, plus linked ebook and image pairs. Processing stays local on tools
+        that promise it; each page warns when a CDN script joins the workflow.
       </div>
     </div>
   );

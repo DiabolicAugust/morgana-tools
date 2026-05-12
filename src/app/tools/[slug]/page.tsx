@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { EbookConvertersStrip } from '@/components/ebook-converters-nav';
 import { JsonLd } from '@/components/json-ld';
 import { Base64Tool } from '@/components/tools/base64-tool';
 import { CaseConverterTool } from '@/components/tools/case-converter-tool';
@@ -12,6 +13,10 @@ import { PasswordGeneratorTool } from '@/components/tools/password-generator-too
 import { TimestampConverterTool } from '@/components/tools/timestamp-converter-tool';
 import { UrlEncodeTool } from '@/components/tools/url-encode-tool';
 import { UuidGeneratorTool } from '@/components/tools/uuid-generator-tool';
+import { EbookPairConverterTool } from '@/components/tools/ebook-pair-converter-tool';
+import { TxtNormalizeTool } from '@/components/tools/ebook-tools';
+import { ebookConversionPairForSlug } from '@/lib/ebook-conversion-routes';
+import { imageConversionPairForSlug } from '@/lib/image-conversions';
 import { getSiteUrl, SITE_NAME } from '@/lib/site';
 import {
   getAllToolSlugs,
@@ -40,6 +45,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const url = `${base}${path}`;
   const title = tool.title;
 
+  const ogDesc =
+    tool.description.length <= 280 ? tool.description : tool.shortDescription;
+
   return {
     title,
     description: tool.description,
@@ -47,24 +55,62 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ...tool.keywords,
       TOOL_CATEGORY_LABELS[tool.categoryId],
       'free online tool',
-      'browser utility',
+      `${TOOL_CATEGORY_LABELS[tool.categoryId]} tools`,
+      SITE_NAME.toLowerCase(),
+      'runs in browser',
     ],
     alternates: { canonical: path },
+    robots: { index: true, follow: true },
     openGraph: {
       type: 'website',
       url,
       title: `${title} — ${SITE_NAME}`,
-      description: tool.shortDescription,
+      description: ogDesc,
     },
     twitter: {
       card: 'summary_large_image',
       title: `${title} — ${SITE_NAME}`,
-      description: tool.shortDescription,
+      description: ogDesc,
     },
   };
 }
 
-function ToolPanels({ slug }: { slug: string }) {
+type SiblingImageTool = { slug: string; title: string };
+type SiblingEbookTool = { slug: string; title: string };
+
+function ToolPanels({
+  slug,
+  siblingImageTools,
+  siblingEbookTools,
+}: {
+  slug: string;
+  siblingImageTools?: SiblingImageTool[];
+  siblingEbookTools?: SiblingEbookTool[];
+}) {
+  const imageConversion = imageConversionPairForSlug(slug);
+  if (imageConversion) {
+    return (
+      <ImageFormatConverterTool
+        from={imageConversion.from}
+        to={imageConversion.to}
+        currentSlug={slug}
+        siblingConversions={siblingImageTools}
+      />
+    );
+  }
+
+  const ebookConversion = ebookConversionPairForSlug(slug);
+  if (ebookConversion) {
+    return (
+      <EbookPairConverterTool
+        from={ebookConversion.from}
+        to={ebookConversion.to}
+        currentSlug={slug}
+        siblingEbookTools={siblingEbookTools}
+      />
+    );
+  }
+
   switch (slug) {
     case 'remove-line-breaks':
       return <LineBreakRemoverTool />;
@@ -84,32 +130,8 @@ function ToolPanels({ slug }: { slug: string }) {
       return <TimestampConverterTool />;
     case 'hash-generator':
       return <HashGeneratorTool />;
-    case 'webp-to-png':
-      return <ImageFormatConverterTool from="webp" to="png" />;
-    case 'webp-to-jpg':
-      return <ImageFormatConverterTool from="webp" to="jpeg" />;
-    case 'png-to-jpg':
-      return <ImageFormatConverterTool from="png" to="jpeg" />;
-    case 'jpg-to-png':
-      return <ImageFormatConverterTool from="jpeg" to="png" />;
-    case 'avif-to-png':
-      return <ImageFormatConverterTool from="avif" to="png" />;
-    case 'png-to-webp':
-      return <ImageFormatConverterTool from="png" to="webp" />;
-    case 'jpg-to-webp':
-      return <ImageFormatConverterTool from="jpeg" to="webp" />;
-    case 'png-to-avif':
-      return <ImageFormatConverterTool from="png" to="avif" />;
-    case 'jpg-to-avif':
-      return <ImageFormatConverterTool from="jpeg" to="avif" />;
-    case 'avif-to-jpg':
-      return <ImageFormatConverterTool from="avif" to="jpeg" />;
-    case 'webp-to-avif':
-      return <ImageFormatConverterTool from="webp" to="avif" />;
-    case 'avif-to-webp':
-      return <ImageFormatConverterTool from="avif" to="webp" />;
-    case 'heic-to-jpg':
-      return <ImageFormatConverterTool from="heic" to="jpeg" />;
+    case 'txt-normalize':
+      return <TxtNormalizeTool />;
     default:
       return null;
   }
@@ -121,8 +143,16 @@ export default async function ToolPage({ params }: Props) {
   if (!tool) notFound();
 
   const base = getSiteUrl();
-  const panel = ToolPanels({ slug });
   const related = getRelatedTools(tool);
+  const siblingImageTools =
+    tool.categoryId === 'images'
+      ? related.map((t) => ({ slug: t.slug, title: t.title }))
+      : undefined;
+  const siblingEbookTools =
+    tool.categoryId === 'ebooks'
+      ? related.map((t) => ({ slug: t.slug, title: t.title }))
+      : undefined;
+  const panel = ToolPanels({ slug, siblingImageTools, siblingEbookTools });
 
   const softwareJsonLd = {
     '@context': 'https://schema.org',
@@ -239,6 +269,12 @@ export default async function ToolPage({ params }: Props) {
 
         {panel}
 
+        {tool.categoryId === 'ebooks' ? (
+          <div className="border-t border-zinc-200 pt-8 dark:border-zinc-800">
+            <EbookConvertersStrip currentSlug={slug} />
+          </div>
+        ) : null}
+
         {tool.faq.length > 0 ? (
           <section aria-labelledby="faq-heading">
             <h2
@@ -273,7 +309,9 @@ export default async function ToolPage({ params }: Props) {
           </section>
         ) : null}
 
-        {related.length > 0 ? (
+        {related.length > 0 &&
+        tool.categoryId !== 'images' &&
+        tool.categoryId !== 'ebooks' ? (
           <section
             aria-labelledby="related-tools"
             className="border-t border-zinc-200 pt-8 dark:border-zinc-800"
@@ -285,7 +323,7 @@ export default async function ToolPage({ params }: Props) {
               Related tools
             </h2>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              You may also find these tools useful.
+              Tools that complement this one—same upfront privacy notes apply.
             </p>
             <ul className="mt-4 flex flex-col gap-3">
               {related.map((t) => (

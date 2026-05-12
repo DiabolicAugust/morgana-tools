@@ -20,11 +20,20 @@ const siteUrl = getSiteUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${SITE_NAME} — free online developer utilities`,
+    default: `${SITE_NAME} — free browser converters & developer tools`,
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    'Free in-browser tools for developers and writers: JSON formatting, Base64 and URL encoding, timestamps, SHA hashes, case conversion, line breaks, UUIDs, and secure passwords—your data stays on your device.',
+    'Free browser tools for ebooks, HEIC/WebP/AVIF/PNG conversions, JSON, Base64, URLs, timestamps, SHA digests, and passwords—local where each page says so.',
+  keywords: [
+    'free online tools',
+    'browser utilities',
+    'image converter online',
+    'ebook converter',
+    'json formatter online',
+    'privacy conscious browser tools',
+    SITE_NAME.toLowerCase(),
+  ],
   applicationName: SITE_NAME,
   robots: {
     index: true,
@@ -36,23 +45,23 @@ export const metadata: Metadata = {
     locale: 'en',
     url: siteUrl,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — developer utilities`,
+    title: `${SITE_NAME} — free browser converters & developer tools`,
     description:
-      'JSON, Base64, URL encode/decode, Unix time, SHA hashes, case tools, line breaks, UUIDs, and passwords—fast, private, no upload.',
+      'Convert files, tune developer payloads, and handle security helpers in-browser. Morgana skips a separate “upload here to convert” step on flows that stay local.',
     images: [
       {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} — free online developer utilities`,
+        alt: `${SITE_NAME} — free browser converters & developer tools`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: SITE_NAME,
+    title: `${SITE_NAME} — browser converters & dev tools`,
     description:
-      'Encoding, hashing, time, text, and security utilities that run locally in your browser.',
+      'Ebooks, images, JSON, encoding, hashing, and text helpers in your browser. Local processing where each page promises it.',
     images: ['/twitter-image'],
   },
   alternates: {

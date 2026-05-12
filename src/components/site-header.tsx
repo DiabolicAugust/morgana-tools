@@ -17,10 +17,12 @@ export function SiteHeader() {
             {SITE_NAME}
           </Link>
           <span className="hidden text-sm text-zinc-500 sm:inline dark:text-zinc-400">
-            Free online utilities
+            Browser tools for files &amp; APIs
           </span>
         </div>
-        <HeaderCategoryNav groups={groups} />
+        <HeaderCategoryNav
+          categoryIds={groups.map((group) => group.categoryId)}
+        />
       </div>
     </header>
   );

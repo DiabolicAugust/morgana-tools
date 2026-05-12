@@ -6,7 +6,14 @@ const path = '/privacy';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
-  description: `How ${SITE_NAME} handles your data. Our utilities run in your browser; we do not ask you to upload content to our servers for processing.`,
+  description:
+    `${SITE_NAME}: how we collect data—most interactive tools describe on-device handling; CDN delivery and ordinary hosting logs still apply.`,
+  keywords: [
+    SITE_NAME.toLowerCase(),
+    'privacy policy',
+    'browser tools privacy',
+    'client side processing',
+  ],
   alternates: {
     canonical: path,
   },
@@ -51,15 +58,16 @@ export default function PrivacyPolicyPage() {
               Overview
             </h2>
             <p>
-              {SITE_NAME} ({canonical}) provides free utilities that run
-              primarily in{' '}
+              {SITE_NAME} ({canonical}) offers free helpers designed to execute
+              in{' '}
               <strong className="font-medium text-zinc-900 dark:text-zinc-100">
                 your web browser
               </strong>
-              . We design the interactive tools so that your input (text,
-              passwords you generate locally, images you convert, etc.) is
-              ordinarily processed on your device—not sent to our servers solely
-              to run those conversions or transformations.
+              whenever a tool advertises local processing: pasted text,
+              freshly generated passwords, images you decode, manuscripts you
+              convert, and related payloads ordinarily stay inside that tab—we
+              are not deliberately ingesting those bits as Morgana-hosted uploads for
+              the conversion itself.
             </p>
           </section>
 
@@ -88,17 +96,16 @@ export default function PrivacyPolicyPage() {
                 </strong>{' '}
                 If we use third-party fonts, CDNs, or similar resources, those
                 providers may process requests according to their own policies.
-                We keep third-party reliance minimal.
+                We keep reliance on vendors as small as we can without breaking the tools.
               </li>
               <li>
                 <strong className="font-medium text-zinc-900 dark:text-zinc-100">
                   Cookies or local storage.
                 </strong>{' '}
-                The site does not rely on intrusive tracking for its core
-                utilities. Essential browser storage (if used) would be limited
-                to things like remembering UI preferences locally in your
-                browser. We do not operate behavioral ad tracking as part of
-                these tools based on current implementation.
+                Morgana&apos;s utilities do not need advertising trackers to
+                operate. Browser storage stays limited—if anything is persisted,
+                it is for benign UI tweaks on your machine, not centralized ad
+                profiles.
               </li>
             </ul>
           </section>
@@ -111,11 +118,10 @@ export default function PrivacyPolicyPage() {
               Accounts and uploads
             </h2>
             <p>
-              You do not need an account to use {SITE_NAME}. We do not require
-              you to submit personal identifiers to run the utilities. Tools
-              that manipulate files or text do their work client-side whenever
-              possible so that we are not deliberately collecting your pasted
-              content as a catalog of uploads.
+              You do not need an account or a profile to run {SITE_NAME}. File-centric
+              converters and parsers keep work in the browser wherever a page describes
+              that workflow, instead of bouncing your payload through a Morgana
+              ingestion queue solely to apply the transformation.
             </p>
           </section>
 
