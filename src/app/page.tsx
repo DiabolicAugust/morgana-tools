@@ -12,34 +12,52 @@ export default function Home() {
   const groups = getToolsGroupedByCategory();
   const prioritized = getToolsSortedBySearchPriority();
 
-  const websiteJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: SITE_NAME,
-    description:
-      "Free browser utilities for JSON, Base64 and URL encoding, Unix timestamps, SHA hashes, text case, line breaks, UUIDs, and password generation.",
-    url: base,
-    inLanguage: "en",
-  };
+  const organizationId = `${base}/#organization`;
+  const websiteId = `${base}/#website`;
 
-  const itemListJsonLd = {
+  const homeGraphJsonLd = {
     "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: `${SITE_NAME} catalog`,
-    numberOfItems: prioritized.length,
-    itemListElement: prioritized.map((tool, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: tool.title,
-      url: `${base}/tools/${tool.slug}`,
-      description: tool.shortDescription,
-    })),
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: SITE_NAME,
+        url: base,
+        logo: {
+          "@type": "ImageObject",
+          url: `${base}/opengraph-image`,
+          width: 1200,
+          height: 630,
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": websiteId,
+        name: SITE_NAME,
+        description:
+          "Free browser utilities for JSON, Base64 and URL encoding, Unix timestamps, SHA hashes, text case, line breaks, UUIDs, and password generation.",
+        url: base,
+        inLanguage: "en",
+        publisher: { "@id": organizationId },
+      },
+      {
+        "@type": "ItemList",
+        name: `${SITE_NAME} catalog`,
+        numberOfItems: prioritized.length,
+        itemListElement: prioritized.map((tool, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: tool.title,
+          url: `${base}/tools/${tool.slug}`,
+          description: tool.shortDescription,
+        })),
+      },
+    ],
   };
 
   return (
     <>
-      <JsonLd data={websiteJsonLd} />
-      <JsonLd data={itemListJsonLd} />
+      <JsonLd data={homeGraphJsonLd} />
       <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-10 px-4 py-10 sm:px-6">
         <header className="max-w-2xl space-y-4">
           <h1 className="text-balance text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50 sm:text-4xl">

@@ -202,30 +202,16 @@ export function ImageFormatConverterTool({ from, to }: Props) {
   const [isFileDragOver, setIsFileDragOver] = useState(false);
   const fileDragDepthRef = useRef(0);
 
-  const blobUrlsRef = useRef({
-    output: null as string | null,
-    preview: null as string | null,
-  });
-  blobUrlsRef.current.output = outputUrl;
-  blobUrlsRef.current.preview = previewUrl;
-
   useEffect(() => {
     return () => {
-      const { output, preview } = blobUrlsRef.current;
-      if (output) URL.revokeObjectURL(output);
-      if (preview) URL.revokeObjectURL(preview);
+      if (outputUrl) URL.revokeObjectURL(outputUrl);
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
     };
-  }, []);
+  }, [outputUrl, previewUrl]);
 
   function resetResult() {
-    setOutputUrl((prev) => {
-      if (prev) URL.revokeObjectURL(prev);
-      return null;
-    });
-    setPreviewUrl((prev) => {
-      if (prev) URL.revokeObjectURL(prev);
-      return null;
-    });
+    setOutputUrl(null);
+    setPreviewUrl(null);
     setDownName(null);
   }
 

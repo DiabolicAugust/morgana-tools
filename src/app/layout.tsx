@@ -39,12 +39,21 @@ export const metadata: Metadata = {
     title: `${SITE_NAME} — developer utilities`,
     description:
       'JSON, Base64, URL encode/decode, Unix time, SHA hashes, case tools, line breaks, UUIDs, and passwords—fast, private, no upload.',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} — free online developer utilities`,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_NAME,
     description:
       'Encoding, hashing, time, text, and security utilities that run locally in your browser.',
+    images: ['/twitter-image'],
   },
   alternates: {
     canonical: siteUrl,
